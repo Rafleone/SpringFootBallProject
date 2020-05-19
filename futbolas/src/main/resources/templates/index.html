@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+
+    <title>Futbolas</title>
+</head>
+<body>
+<button type="button" class="btn btn-secondary"><a th:href="@{/logout}" style="text-decoration: none; color: #000">Logout</a></button>
+
+<div align="center">
+    <h1>Futbolas</h1>
+    <button type="button" class="btn btn-success"><a href="new" style="text-decoration: none;color: #fff">Create New Team</a></button>
+    <br/><br/>
+
+    <form th:action="@{/listFutbolas}" method="get">
+        <input id="txtSearch" type="text" placeholder="Search" name="keyword">
+        <button type="submit">GO</button>
+    </form>
+    <br><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Anons</th>
+                <th>Made In</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="futbolas : ${listFutbolas}">
+            	<td th:text="${futbolas.id}">Post ID</td>
+                <td th:text="${futbolas.name}">Name</td>
+                <td th:text="${futbolas.team}">Team</td>
+                <td th:text="${futbolas.country}">Country</td>
+                <td>
+                    <button type="button" class="btn btn-warning"><a  th:href="@{'/edit/' + ${futbolas.id}}" style="color: #fff;text-decoration: none">Edit</a></button>
+                	&nbsp;&nbsp;&nbsp;
+                	<button type="button" class="btn btn-danger"><a th:href="@{'/delete/' + ${futbolas.id}}" style="color: #fff;text-decoration: none">Delete</a></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>    
+</body>
+</html>
